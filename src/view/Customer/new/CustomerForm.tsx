@@ -12,7 +12,7 @@ const schema = yup.object().shape({
   name: yupFormSchemas.string("name", {
     required: true,
     min: 2,
-    max: 4,
+    max: 15,
   }),
   birthdate: yupFormSchemas.date("birthdate", {}),
 });
