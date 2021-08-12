@@ -21,6 +21,11 @@ const privateRoutes = [
     exact: true,
   },
   {
+    path: "/customer/:id/edit",
+    loader: () => import("src/view/Customer/new/CustomerFormPage"),
+    exact: true,
+  },
+  {
     path: "/user",
     loader: () => import("src/view/User/list/UserPage"),
     exact: true,

@@ -8,6 +8,7 @@ import { i18n } from "src/i18n";
 import FormWrapper from "../../shared/styles/FormWrapper";
 import DatePickerFormItem from "../../shared/form/items/DatePickerFormItem";
 import moment from "moment";
+import ButtonIcon from "src/view/shared/ButtonIcon";
 const schema = yup.object().shape({
   name: yupFormSchemas.string("name", {
     required: true,
@@ -31,8 +32,9 @@ function CustomerForm(props) {
     mode: "all",
     defaultValues: initailValues,
   });
-  const onSubmit = (values) => {
-    props.onSubmit(values);
+
+  const onSubmit = (id, values) => {
+    props.onSubmit(props.record?.id, values);
   };
   return (
     <FormWrapper>
@@ -55,8 +57,10 @@ function CustomerForm(props) {
           </div>
           <button
             className='btn btn-primary'
+            disabled={props.saveLoading}
             type='button'
             onClick={form.handleSubmit(onSubmit)}>
+            <ButtonIcon loading={props.saveLoading} iconClass='far fa-save' />
             Submit
           </button>
 
