@@ -33,7 +33,7 @@ function CustomerForm(props) {
     defaultValues: initailValues,
   });
 
-  const onSubmit = (id, values) => {
+  const onSubmit = (values) => {
     props.onSubmit(props.record?.id, values);
   };
   return (
