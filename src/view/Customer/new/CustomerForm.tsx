@@ -36,6 +36,12 @@ function CustomerForm(props) {
   const onSubmit = (values) => {
     props.onSubmit(props.record?.id, values);
   };
+
+  const onReset = () => {
+    Object.keys(initailValues).forEach((key) => {
+      form.setValue(key, initailValues[key]);
+    });
+  };
   return (
     <FormWrapper>
       <FormProvider {...form}>
@@ -63,7 +69,16 @@ function CustomerForm(props) {
             <ButtonIcon loading={props.saveLoading} iconClass='far fa-save' />
             Submit
           </button>
-
+          &nbsp;
+          <button
+            className='btn btn-light'
+            disabled={props.saveLoading}
+            type='button'
+            onClick={onReset}>
+            <i className='fas fa-undo'></i>
+            reset
+          </button>
+          &nbsp;
           {props.onCancel ? (
             <button
               className='btn btn-dark'

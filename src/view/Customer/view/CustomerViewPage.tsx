@@ -5,6 +5,8 @@ import { useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ContentWrapper from "src/view/Layout/styles/ContentWrapper";
 import CustomerView from "src/view/Customer/view/CustomerView";
+import CustomerViewToolbar from "src/view/Customer/view/CustomerViewToolbar";
+import PageTitle from "src/view/shared/styles/PageTitle";
 function CustomerPage(props) {
   const dispatch = useDispatch();
 
@@ -18,6 +20,8 @@ function CustomerPage(props) {
 
   return (
     <ContentWrapper>
+      <PageTitle>View Customer</PageTitle>
+      <CustomerViewToolbar match={match} />
       <CustomerView loadign={loading} record={record} />
     </ContentWrapper>
   );
