@@ -4,6 +4,7 @@ import selectors from "src/modules/customer/view/customerViewSelectors";
 import { useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ContentWrapper from "src/view/Layout/styles/ContentWrapper";
+import CustomerView from "src/view/Customer/view/CustomerView";
 function CustomerPage(props) {
   const dispatch = useDispatch();
 
@@ -17,7 +18,7 @@ function CustomerPage(props) {
 
   return (
     <ContentWrapper>
-      <p>ViewPage</p>
+      <CustomerView loadign={loading} record={record} />
     </ContentWrapper>
   );
 }
