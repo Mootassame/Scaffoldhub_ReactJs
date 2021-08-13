@@ -36,4 +36,12 @@ const privateRoutes = [
   },
 ].filter(Boolean);
 
-export default { privateRoutes };
+const publicRoutes = [
+  {
+    path: "/auth/signin",
+    loader: () => import("src/view/auth/SigninPage"),
+  },
+  { path: "/auth/signup", loader: () => import("src/view/auth/SignupPage") },
+].filter(Boolean);
+
+export default { privateRoutes, publicRoutes };
