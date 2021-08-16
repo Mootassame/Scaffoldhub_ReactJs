@@ -13,7 +13,8 @@ import { useLocation } from "react-router-dom";
 import ButtonIcon from "src/view/shared/ButtonIcon";
 import queryString from "query-string";
 import Message from "src/view/shared/message";
-
+import OtherActions from "src/view/auth/styles/OtherActions";
+import { Link } from "react-router-dom";
 const schema = yup.object().shape({
   email: yupFormSchemas.string("email", {
     required: true,
@@ -83,6 +84,12 @@ function SigninPage() {
               <ButtonIcon loading={loading} />
               Signin
             </button>
+
+            <OtherActions>
+              <Link to='/auth/signup' className='btn btn-sm btn-link'>
+                Create An Account
+              </Link>
+            </OtherActions>
           </form>
         </FormProvider>
       </Content>

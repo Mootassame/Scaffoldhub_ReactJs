@@ -1,4 +1,4 @@
-import { tenantSubdomain } from '../tenant/tenantSubdomain';
+import { tenantSubdomain } from "../tenant/tenantSubdomain";
 
 export default class AuthCurrentTenant {
   static selectAndSaveOnStorageFor(currentUser) {
@@ -11,7 +11,7 @@ export default class AuthCurrentTenant {
     }
 
     const activeTenants = currentUser.tenants.filter(
-      (tenantUser) => tenantUser.status === 'active',
+      (tenantUser) => tenantUser.status === "active"
     );
 
     if (!activeTenants || !activeTenants.length) {
@@ -35,9 +35,7 @@ export default class AuthCurrentTenant {
       tenantSubdomain.isEnabled &&
       !tenantSubdomain.isSubdomainOf(tenant.url)
     ) {
-      return tenantSubdomain.redirectAuthenticatedTo(
-        tenant.url,
-      );
+      return tenantSubdomain.redirectAuthenticatedTo(tenant.url);
     }
 
     this.set(tenant);
@@ -45,8 +43,7 @@ export default class AuthCurrentTenant {
   }
 
   static get() {
-    const tenantASString =
-      localStorage.getItem('tenant') || null;
+    const tenantASString = localStorage.getItem("tenant") || null;
 
     if (tenantASString) {
       return JSON.parse(tenantASString).id;
@@ -56,8 +53,7 @@ export default class AuthCurrentTenant {
   }
 
   static getSettings() {
-    const tenantASString =
-      localStorage.getItem('tenant') || null;
+    const tenantASString = localStorage.getItem("tenant") || null;
 
     if (tenantASString) {
       const tenant = JSON.parse(tenantASString);
@@ -81,10 +77,10 @@ export default class AuthCurrentTenant {
       return this.clear();
     }
 
-    localStorage.setItem('tenant', JSON.stringify(tenant));
+    localStorage.setItem("tenant", JSON.stringify(tenant));
   }
 
   static clear() {
-    localStorage.removeItem('tenant');
+    localStorage.removeItem("tenant");
   }
 }

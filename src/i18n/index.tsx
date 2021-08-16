@@ -1,13 +1,10 @@
-import React from 'react';
-import _get from 'lodash/get';
-import moment from 'moment';
-import {
-  registerLocale,
-  setDefaultLocale,
-} from 'react-datepicker';
-import { setLocale as setYupLocale } from 'yup';
+import React from "react";
+import _get from "lodash/get";
+import moment from "moment";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { setLocale as setYupLocale } from "yup";
 
-let currentLanguageCode = '';
+let currentLanguageCode = "";
 
 const languages: {
   [key: string]: {
@@ -19,65 +16,59 @@ const languages: {
   };
 } = {
   en: {
-    id: 'en',
-    label: 'English',
-    flag: '/images/flags/United-States.png',
+    id: "en",
+    label: "English",
+    flag: "/images/flags/United-States.png",
     dateFns: null,
     dictionary: null,
   },
   es: {
-    id: 'es',
-    label: 'Español',
-    flag: '/images/flags/Spain.png',
+    id: "es",
+    label: "Español",
+    flag: "/images/flags/Spain.png",
     dateFns: null,
     dictionary: null,
   },
-  'pt-BR': {
-    id: 'pt-BR',
-    label: 'Português',
-    flag: '/images/flags/Brazil.png',
+  "pt-BR": {
+    id: "pt-BR",
+    label: "Português",
+    flag: "/images/flags/Brazil.png",
     dateFns: null,
     dictionary: null,
   },
 };
 
 export async function init() {
-  currentLanguageCode =
-    localStorage.getItem('language') || 'en';
+  currentLanguageCode = localStorage.getItem("language") || "en";
   setLanguageCode(currentLanguageCode);
 
-  if (currentLanguageCode === 'en') {
+  if (currentLanguageCode === "en") {
     await initEn();
   }
 
-  if (currentLanguageCode === 'pt-BR') {
+  if (currentLanguageCode === "pt-BR") {
     await initPtBr();
   }
 
-  if (currentLanguageCode === 'es') {
+  if (currentLanguageCode === "es") {
     await initEs();
   }
 }
 
 async function initEs() {
-  const language = languages['es'];
+  const language = languages["es"];
 
   // @ts-ignore
-  const momentLocale = (await import('moment/locale/es'))
-    .default;
+  const momentLocale = (await import("moment/locale/es")).default;
 
-  language.dateFns = (
-    await import('date-fns/locale/es')
-  ).default;
+  language.dateFns = (await import("date-fns/locale/es")).default;
 
-  registerLocale('es', language.dateFns);
-  setDefaultLocale('es');
+  registerLocale("es", language.dateFns);
+  setDefaultLocale("es");
 
-  language.dictionary = (
-    await import('src/i18n/es')
-  ).default;
+  language.dictionary = (await import("src/i18n/es")).default;
 
-  moment.locale('es', momentLocale);
+  moment.locale("es", momentLocale);
 
   if (language.dictionary.validation) {
     setYupLocale(language.dictionary.validation);
@@ -87,24 +78,19 @@ async function initEs() {
 }
 
 async function initPtBr() {
-  const language = languages['pt-BR'];
+  const language = languages["pt-BR"];
 
   // @ts-ignore
-  const momentLocale = (await import('moment/locale/pt-br'))
-    .default;
+  const momentLocale = (await import("moment/locale/pt-br")).default;
 
-  language.dateFns = (
-    await import('date-fns/locale/pt-BR')
-  ).default;
+  language.dateFns = (await import("date-fns/locale/pt-BR")).default;
 
-  registerLocale('pt-BR', language.dateFns);
-  setDefaultLocale('pt-BR');
+  registerLocale("pt-BR", language.dateFns);
+  setDefaultLocale("pt-BR");
 
-  language.dictionary = (
-    await import('src/i18n/pt-BR')
-  ).default;
+  language.dictionary = (await import("src/i18n/pt-BR")).default;
 
-  moment.locale('pt-BR', momentLocale);
+  moment.locale("pt-BR", momentLocale);
 
   if (language.dictionary.validation) {
     setYupLocale(language.dictionary.validation);
@@ -114,11 +100,9 @@ async function initPtBr() {
 }
 
 async function initEn() {
-  const language = languages['en'];
+  const language = languages["en"];
 
-  language.dictionary = (
-    await import('src/i18n/en')
-  ).default;
+  language.dictionary = (await import("src/i18n/en")).default;
 
   if (language.dictionary.validation) {
     setYupLocale(language.dictionary.validation);
@@ -137,13 +121,8 @@ function format(message, args) {
   }
 
   try {
-    return message.replace(/{(\d+)}/g, function (
-      match,
-      number,
-    ) {
-      return typeof args[number] != 'undefined'
-        ? args[number]
-        : match;
+    return message.replace(/{(\d+)}/g, function (match, number) {
+      return typeof args[number] != "undefined" ? args[number] : match;
     });
   } catch (error) {
     console.error(message, error);
@@ -166,7 +145,7 @@ export function setLanguageCode(arg) {
     throw new Error(`Invalid language ${arg}.`);
   }
 
-  localStorage.setItem('language', arg);
+  localStorage.setItem("language", arg);
 }
 
 export function i18nExists(key) {
